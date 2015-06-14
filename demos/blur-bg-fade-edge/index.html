@@ -9,11 +9,13 @@
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
         <style type="text/css">
         html, body {
-        	margin:0px;
+          margin:0px;
             background:#fff;
+            height:100%;
         }
         .frame-outer {
               position: absolute;
+              top:0px;
               width: 100%;
               overflow: hidden;
               height: 365px;
@@ -34,18 +36,33 @@
           }
           .main-image {
             width: 720px;
-            -webkit-mask-image: url(http://betterdaysforever.com/article/mask-inverted.svg);
+            -webkit-mask-image: url(img/mask-inverted.svg);
             -webkit-mask-repeat: space;
-            mask-image: url(http://betterdaysforever.com/article/mask-inverted.svg);
+            mask-image: url(img//mask-inverted.svg);
             mask-repeat: space;
-            
+          }
+          .text-here {
+            margin-top: 396px;
+          }
+          h1, p {
+            margin:20px auto;
+            max-width:800px;
           }
         </style>
     </head>
     <body>
+    <a href="https://github.com/simsketch/blur-bg-fade-edge"><img style="position: absolute; top: 0; right: 0; border: 0;z-index:5;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
     <div class="frame-outer">
         <canvas class="hero__background" width="100%" height="200" id="heroCanvas"></canvas>
-        <img src="http://lorempixel.com/output/city-q-c-720-480-2.jpg" class="main-image" />
+        <img src="img/img.jpg" class="main-image" />
+    </div>
+    <div class="text-here">
+    <h1>blur-bg-fade-edge
+    </h1>
+    <p>If you need to dynamically create a blurred background from an image, then place the same image on top of that background with the right and left sides feathered, then this is the repo for you.</p>
+      <p>
+        One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me? " he thought.
+      </p>
     </div>
     </body>
     <script>
@@ -55,7 +72,7 @@ var canvas = document.getElementById("heroCanvas");
 var canvasContext = canvas.getContext("2d");
 
 var canvasBackground = new Image();
-canvasBackground.src = "http://lorempixel.com/output/city-q-c-720-480-2.jpg";
+canvasBackground.src = "img/img.jpg";
 
 var drawBlur = function() {
   // Store the width and height of the canvas for below
