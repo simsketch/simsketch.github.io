@@ -86,7 +86,7 @@ var drawBlur = function() {
   // This draws the image we just loaded to our canvas
   canvasContext.drawImage(canvasBackground, 0, 0, w, h);
   // This blurs the contents of the entire canvas
-  stackBlurCanvasRGBA("heroCanvas", 0, 0, w, h, 100);
+  stackBlurCanvasRGBA("heroCanvas", 0, 0, w, h, 20);
 }
 
 canvasBackground.onload = function() {
