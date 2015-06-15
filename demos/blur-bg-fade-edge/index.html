@@ -29,16 +29,20 @@
               height: 1000px;
               /* max-height: 1000px; */
               width: 180%;
-              -webkit-filter: blur(100px);
               -webkit-transform: translate3d(0, 0, 0);
-              filter: blur(100px);
               transform: translate3d(0, 0, 0);
+              filter: blur(100px);
+              -webkit-filter: blur(100px);
+              -moz-filter: blur(100px);
+                -o-filter: blur(100px); 
+                -ms-filter: blur(100px); 
+              -ms-filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='100');
           }
           .main-image {
             width: 720px;
-            -webkit-mask-image: url(img/mask-inverted.svg);
+            -webkit-mask-image: url(img/mask-inverted-fine.svg);
             -webkit-mask-repeat: space;
-            mask-image: url(img//mask-inverted.svg);
+            mask-image: url(img//mask-inverted-fine.svg);
             mask-repeat: space;
           }
           .text-here {
@@ -65,6 +69,7 @@
       </p>
     </div>
     </body>
+    <<script src="js/StackBlur.js"></script>
     <script>
 
 
