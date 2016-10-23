@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Shower iframe</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="css/liteaccordion.css" rel="stylesheet" />
+        <style>
+            /* css for this page */
+            body { font: 14px/24px 'Helvetica Neue', Arial, sans-serif; color: #333; width: 100%; text-align:center; margin: 30px auto 60px; background: #eee }
+            body > h2 { margin: 30px 0 15px; text-shadow: 1px 1px 0 white; border-bottom: 2px solid #333; padding-bottom: 5px }
+            h1 { text-align: center; margin-bottom: 30px; text-shadow: 1px 1px 0 white }
+            strong + p { margin-top: 0 }
+            dt { font-weight: bold }
+            dd { margin: 0 }
+            figure { display: block; width: 100%; height: 100%; margin: 0 }
+            .accordion.stitch .slide div { background: #333 }
+            .social-buttons { width: 100%; text-align: center; margin-top: 30px }
+            .social-buttons ul { display: inline-block; margin: 0 }
+            .social-buttons li { float: left; list-style-type: none }
+            .call_out {
+                color: #444444;
+                background: url('img-demo/callout_bg.gif') repeat;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+                -webkit-box-shadow: 1px 0 3px rgba(0, 0, 0, 0.08);
+                -moz-box-shadow: 1px 0 3px rgba(0, 0, 0, 0.08);
+                box-shadow: 1px 0 3px rgba(0, 0, 0, 0.08);
+                margin-top: 20px;
+            }
+
+            .call_out .wrap {
+                padding: 19px 20px 17px 20px;
+                border: 1px solid #d7d4cb;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+            }
+
+            .call_out h2 {
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-style: italic;
+                text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
+                color: #444444;
+                font-size: 18px;
+                line-height: 20px;
+                margin: 10px 0;
+            }
+
+            .call_out a.alt_btn {
+                background: url('img-demo/sprite.png') 24px 356px;
+                display: block;
+                padding: 0 0 0 23px;
+                float: right;
+                margin: -45px 0 0 0;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-style: italic;
+                font-size: 14px;
+                color: #252525;
+                text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.8);
+                text-align: center;
+                border: none;
+                -webkit-box-shadow: 0;
+                -moz-box-shadow: 0;
+                box-shadow: 0;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+            .call_out a.alt_btn span {
+                padding: 14px 23px 15px 0;
+                background: url('img-demo/sprite.png') 100% 253px;
+                display: block;
+            }
+
+            .call_out a:hover.alt_btn { background: url('img-demo/sprite.png') 24px 408px }
+            .call_out a:hover.alt_btn span { background: url('img-demo/sprite.png') 100% 304px }
+            .liteAccordion {
+                margin:0 auto;
+            }
+            .inner-slide-container {
+                padding:20px;
+                height: 100%;
+                overflow-y: scroll;
+            }
+            .standard-link-wrapper {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+            a.standard-link {
+                font-size:12px;
+            }
+        </style>
+
+        <!-- jQuery -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+        <!-- easing -->
+        <script src="js/jquery.easing.1.3.js"></script>
+
+        <!-- liteAccordion js -->
+        <script src="js/liteaccordion.jquery.js"></script>
+
+        <!--[if lt IE 9]>
+            <script>
+                document.createElement('figure');
+                document.createElement('figcaption');
+            </script>
+        <![endif]-->
+        <script type="text/javascript" src="https://glassd.commonedge.com/cdn/md5.js"></script>
+        <script type="text/javascript" src="https://glassd.commonedge.com/cdn/sha1.js"></script>
+        <script type="text/javascript" src="https://glassd.commonedge.com/cdn/es6-shim.js"></script>
+        <script type="text/javascript" src="https://glassd.commonedge.com/cdn/glassd-js.js"></script>
+    </head>
+    <body>
+    <h1>Shower Doors iframe</h1>
+        <div id="two">
+            <ol>
+                <li>
+                    <h2><span>Shower Type</span></h2>
+                    <div>
+                        <div class="inner-slide-container" id="shower-type">
+                            <h3>What You Need</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. <a href="#">Link somewhere</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Layout</span></h2>
+                    <div>
+                        <div class="inner-slide-container" id="layout-type">
+                            <h3>Select Shape</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. <a href="#">Link somewhere</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Measurements</span></h2>
+                    <div>
+                        <div class="inner-slide-container">
+                            <h3>Select Dimensions</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. <a href="#">Link somewhere</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Customizations</span></h2>
+                    <div>
+                        <div class="inner-slide-container">
+                            <h3>This is Slide One.</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. <a href="#">Link somewhere</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Your Information</span></h2>
+                    <div>
+                        <div class="inner-slide-container">
+                            <h3>This is Slide One.</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. <a href="#">Link somewhere</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <noscript>
+                <p>Please enable JavaScript to get the full experience.</p>
+            </noscript>
+        </div>
+
+
+        <script>
+            $(document).ready( function() {
+                getCategories(new GlassdClient(), populateCategories);
+                $('#two').liteAccordion({
+                    containerWidth : 1400,                   // fixed (px)
+                    containerHeight : 640,                  // fixed (px)
+                    headerWidth: 48,                        // fixed (px)
+
+                    activateOn : 'click',                   // click or mouseover
+                    firstSlide : 1,                         // displays slide (n) on page load
+                    slideSpeed : 500,                       // slide animation speed
+                    onTriggerSlide : function() {},         // callback on slide activate
+                    onSlideAnimComplete : function() {},    // callback on slide anim complete
+
+                    autoPlay : false,                       // automatically cycle through slides
+                    pauseOnHover : false,                   // pause on hover
+                    cycleSpeed : 6000,                      // time between slide cycles
+                    easing : 'swing',                       // custom easing function
+
+                    theme : 'basic',                        // basic, dark, light, colorful, or stitch
+                    rounded : false,                        // square or rounded corners
+                    enumerateSlides : false,                // put numbers on slides
+                    linkable : false                        // link slides via hash
+                });
+            });
+            function populateCategories(breakdown) {
+                var showerTypesSlide = $('#shower-type');
+                var theHtml = "";
+                $.each(breakdown, function (i) {
+                    //console.log(breakdown[i].Id + breakdown[i].Name);
+                    var theId = "'"+breakdown[i].Id+"'";
+                    if (i > 0) {
+                        var itemURL = breakdown[i].Name.replace(/\s+/g, '-').toLowerCase();
+                        theHtml += '<div class="col-sm-3">';
+                        theHtml += '<div class="ImgLinkWrap AnimHolder">';
+                        theHtml += '<a onclick="getLayouts(new GlassdClient(), '+ theId +')">';
+                        theHtml += '<img src="' + breakdown[i].CategoryPicture + '" alt="' + breakdown[i].Name + '" class="img-responsive swapimg"></a>';
+                        theHtml += '<div class="grayBar">';
+                        theHtml += '<a class="standard-link" onclick="getLayouts(new GlassdClient(), '+ theId +')">' + breakdown[i].Name + ' »</a>';
+                        theHtml += '</div></div></div>';
+                    }
+                });
+                showerTypesSlide.html(theHtml); 
+                $('.ImgLinkWrap img')
+                .mouseover(function () { $(this).attr("src", $(this).attr("src").replace(".jpg", ".gif")); })
+                .mouseout(function () { $(this).attr("src", $(this).attr("src").replace(".gif", ".jpg")); });
+            }
+            
+            function getLayouts($glassd, $categoryId) {
+                return $.ajax({
+                    type: "GET",
+                    beforeSend: function (request) {
+                        var message = "GET/category/"+ $categoryId + CryptoJS.MD5("");
+                        var shaObj = new jsSHA(message, "TEXT");
+                        var hmac = shaObj.getHMAC($glassd.access_token, "TEXT", "SHA-1", "HEX");
+                        request.setRequestHeader("Authorization", "GWS "+$glassd.secret_token+":" + hmac);
+                    },
+                    url: endpoint + '/category/'+ $categoryId,
+                    dataType: 'json'
+                })
+                .fail(function(err) {
+                    console.log("error: "+JSON.stringify(err));
+                })
+                .done(function (breakdown) {
+                    console.log(breakdown);
+                    populateLayouts(breakdown);
+                })
+            }
+            function populateLayouts(breakdown) {
+                var showerTypesSlide = $('#layout-type');
+                var theHtml = "";
+                var childrenBreakdown = breakdown.children;
+
+                $.each(childrenBreakdown, function (i) {
+                    //console.log(breakdown[i].Id + breakdown[i].Name);
+                    var theId = childrenBreakdown[i].Id;
+                    if (i > 0) {
+                        var itemURL = childrenBreakdown[i].Name.replace(/\s+/g, '-').toLowerCase();
+                        theHtml += '<div class="col-sm-3">';
+                        theHtml += '<div class="ImgLinkWrap AnimHolder">';
+                        theHtml += '<a onclick="getCategories(new GlassdClient(), "'+ theId +'")">';
+                        theHtml += '<img src="' + childrenBreakdown[i].Picture + '" title="' + childrenBreakdown[i].Name + '" class="img-responsive swapimg"></a>';
+                        theHtml += '<div class="standard-link-wrapper">';
+                        theHtml += '<a class="standard-link" onclick="getMeasurements(new GlassdClient(), "'+ theId +'")">' + childrenBreakdown[i].Name + ' »</a>';
+                        theHtml += '</div></div></div>';
+                    }
+                });
+                showerTypesSlide.html(theHtml);
+                $('#two').liteAccordion('next');
+                $('.ImgLinkWrap img')
+                .mouseover(function () { $(this).attr("src", $(this).attr("src").replace(".jpg", ".gif")); })
+                .mouseout(function () { $(this).attr("src", $(this).attr("src").replace(".gif", ".jpg")); });
+            }
+            
+            // function getCategories($glassd, returnFunction) {
+            //     return $.ajax({
+            //         type: "GET",
+            //         beforeSend: function (request) {
+            //             var message = "GET/category" + CryptoJS.MD5("");
+            //             var shaObj = new jsSHA(message, "TEXT");
+            //             var hmac = shaObj.getHMAC($glassd.access_token, "TEXT", "SHA-1", "HEX");
+            //             request.setRequestHeader("Authorization", "GWS "+$glassd.secret_token+":" + hmac);
+            //         },
+            //         url: endpoint + '/category',
+            //         dataType: 'json'
+            //     })
+            //     .fail(function(err) {
+            //         console.log("error: "+JSON.stringify(err));
+            //     })
+            //     .done(function (breakdown) {
+            //         //console.log(breakdown);
+            //         returnFunction(breakdown);
+            //     })
+            // }
+
+        </script>
+
+    </body>
+</html>
