@@ -166,92 +166,19 @@
         <script type="text/javascript" src="https://glassd.commonedge.com/cdn/md5.js"></script>
         <script type="text/javascript" src="https://glassd.commonedge.com/cdn/sha1.js"></script>
         <script type="text/javascript" src="https://glassd.commonedge.com/cdn/es6-shim.js"></script>
-        <script type="text/javascript" src="https://glassd.commonedge.com/cdn/glassd-js.js"></script>
-    </head>
-    <body>
-    <h1>Shower Doors iframe</h1>
-        <div id="two">
-            <ol>
-                <li>
-                    <h2><span>Shower Type</span></h2>
-                    <div>
-                        <div class="inner-slide-container" id="shower-type">
-                            <p>
-                            <div class="spinner">
-                                    <div class="bounce1"></div>
-                                    <div class="bounce2"></div>
-                                    <div class="bounce3"></div>
-                                </div>
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <h2><span>Layout</span></h2>
-                    <div>
-                        <div class="inner-slide-container" id="layout-type">
-                            <p>
-                                <div class="spinner">
-                                    <div class="bounce1"></div>
-                                    <div class="bounce2"></div>
-                                    <div class="bounce3"></div>
-                                </div>
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <h2><span>Measurements</span></h2>
-                    <div>
-                        <div class="inner-slide-container">
-                            <p>
-                                <div class="spinner">
-                                    <div class="bounce1"></div>
-                                    <div class="bounce2"></div>
-                                    <div class="bounce3"></div>
-                                </div>
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <h2><span>Customizations</span></h2>
-                    <div>
-                        <div class="inner-slide-container">
-                            <p>
-                                <div class="spinner">
-                                    <div class="bounce1"></div>
-                                    <div class="bounce2"></div>
-                                    <div class="bounce3"></div>
-                                </div>
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <h2><span>Your Information</span></h2>
-                    <div>
-                        <div class="inner-slide-container">
-                            <p>
-                                <div class="spinner">
-                                    <div class="bounce1"></div>
-                                    <div class="bounce2"></div>
-                                    <div class="bounce3"></div>
-                                </div>
-                            </p>
-                        </div>
-                    </div>
-                </li>
-            </ol>
-            <noscript>
-                <p>Please enable JavaScript to get the full experience.</p>
-            </noscript>
-        </div>
+        <script>
+            window.endpoint = "https://glassd-dev.commonedge.com";
 
+            function GlassdClient(access_token, secret_token) {
+                    this.access_token = "71beb8c7808af60fe2df5c202f1f9720";
+                    this.secret_token = "fbcb7cce8ced6ed99f989128be6a941a";
+            }
+
+        </script>
 
         <script>
             $(document).ready( function() {
-                getCategories(new GlassdClient(), populateCategories);
+                getCategories(new GlassdClient());
                 $('#two').liteAccordion({
                     containerWidth : 1200,                   // fixed (px)
                     containerHeight : 700,                  // fixed (px)
@@ -274,8 +201,35 @@
                     linkable : false                        // link slides via hash
                 });
             });
+
+            function toLetters(num) {
+                "use strict";
+                var mod = num % 26,
+                    pow = num / 26 | 0,
+                    out = mod ? String.fromCharCode(64 + mod) : (--pow, 'Z');
+                return pow ? toLetters(pow) + out : out;
+            }
+            function getCategories($glassd) {
+                return $.ajax({
+                    type: "GET",
+                    beforeSend: function (request) {
+                        var message = "GET/category" + CryptoJS.MD5("");
+                        var shaObj = new jsSHA(message, "TEXT");
+                        var hmac = shaObj.getHMAC($glassd.secret_token, "TEXT", "SHA-1", "HEX");
+                        request.setRequestHeader("Authorization", "GWS "+$glassd.access_token+":" + hmac);
+                    },
+                    url: endpoint + '/category',
+                    dataType: 'json'
+                })
+                .fail(function(err) {
+                    console.log("error: "+JSON.stringify(err));
+                })
+                .done(function (breakdown) {
+                    populateCategories(breakdown);
+                })
+            }
             function populateCategories(breakdown) {
-                var showerTypesSlide = $('#shower-type');
+                var showerTypesSlide = $('#category-slide');
                 var theHtml = "";
                 $.each(breakdown, function (i) {
                     //console.log(breakdown[i].Id + breakdown[i].Name);
@@ -296,15 +250,14 @@
                 .mouseover(function () { $(this).attr("src", $(this).attr("src").replace(".jpg", ".gif")); })
                 .mouseout(function () { $(this).attr("src", $(this).attr("src").replace(".gif", ".jpg")); });
             }
-            
             function getLayouts($glassd, $categoryId) {
                 return $.ajax({
                     type: "GET",
                     beforeSend: function (request) {
                         var message = "GET/category/"+ $categoryId + CryptoJS.MD5("");
                         var shaObj = new jsSHA(message, "TEXT");
-                        var hmac = shaObj.getHMAC($glassd.access_token, "TEXT", "SHA-1", "HEX");
-                        request.setRequestHeader("Authorization", "GWS "+$glassd.secret_token+":" + hmac);
+                        var hmac = shaObj.getHMAC($glassd.secret_token, "TEXT", "SHA-1", "HEX");
+                        request.setRequestHeader("Authorization", "GWS "+$glassd.access_token+":" + hmac);
                     },
                     url: endpoint + '/category/'+ $categoryId,
                     dataType: 'json'
@@ -318,21 +271,22 @@
                 })
             }
             function populateLayouts(breakdown) {
-                var showerTypesSlide = $('#layout-type');
+                var showerTypesSlide = $('#layout-slide');
                 var theHtml = "";
                 var childrenBreakdown = breakdown.children;
 
                 $.each(childrenBreakdown, function (i) {
                     //console.log(breakdown[i].Id + breakdown[i].Name);
                     var theId = childrenBreakdown[i].Id;
+                    //console.log(theId);
                     if (i > 0) {
                         var itemURL = childrenBreakdown[i].Name.replace(/\s+/g, '-').toLowerCase();
                         theHtml += '<div class="col-sm-3">';
                         theHtml += '<div class="ImgLinkWrap AnimHolder">';
-                        theHtml += '<a onclick="getCategories(new GlassdClient(), "'+ theId +'")">';
+                        theHtml += '<a onclick="getMeasurements(new GlassdClient(), \''+ theId +'\')">';
                         theHtml += '<img src="' + childrenBreakdown[i].Picture + '" title="' + childrenBreakdown[i].Name + '" class="img-responsive swapimg"></a>';
                         theHtml += '<div class="standard-link-wrapper">';
-                        theHtml += '<a class="standard-link" onclick="getMeasurements(new GlassdClient(), "'+ theId +'")">' + childrenBreakdown[i].Name + ' »</a>';
+                        theHtml += '<a class="standard-link" onclick="getMeasurements(new GlassdClient(), \''+ theId +'\')">' + childrenBreakdown[i].Name + ' »</a>';
                         theHtml += '</div></div></div>';
                     }
                 });
@@ -342,7 +296,70 @@
                 .mouseover(function () { $(this).attr("src", $(this).attr("src").replace(".jpg", ".gif")); })
                 .mouseout(function () { $(this).attr("src", $(this).attr("src").replace(".gif", ".jpg")); });
             }
-            
+            function getMeasurements($glassd, $templateId) {
+                return $.ajax({
+                    type: "GET",
+                    beforeSend: function (request) {
+                        var message = "GET/template/"+ $templateId + CryptoJS.MD5("");
+                        var shaObj = new jsSHA(message, "TEXT");
+                        var hmac = shaObj.getHMAC($glassd.secret_token, "TEXT", "SHA-1", "HEX");
+                        request.setRequestHeader("Authorization", "GWS "+$glassd.access_token+":" + hmac);
+                    },
+                    url: endpoint + '/template/'+ $templateId,
+                    dataType: 'json'
+                })
+                .fail(function(err) {
+                    console.log("error: "+JSON.stringify(err));
+                })
+                .done(function (breakdown) {
+                    console.log(breakdown);
+                    populateMeasurements(breakdown);
+                })
+            }
+            function populateMeasurements(breakdown) {
+                var showerTypesSlide = $('#measurements-slide');
+                var theHtml = "";
+                var measurementsBreakdown = breakdown.Measurements;
+                // debugger;
+
+                // for(i=0; i<Object.keys(measurementsBreakdown).length; i++){
+                //     console.log(measurementsBreakdown[i]);
+                //     var k = i+1;
+                //     var indexLetter = toLetters(k);
+                //     console.log(indexLetter);
+
+                //     var select = document.createElement("select");
+                //     select.setAttribute("id","measurement"+indexLetter);
+                //     var option = document.createElement("option");
+                //     option.text = indexLetter;
+                //     select.add(option);
+                // }
+                // length of measurements object
+                var selectDropdowns = [];
+
+                for(i=0; i<Object.keys(measurementsBreakdown).length; i++){
+                    var indexLetter = toLetters(i+1);
+                    var select = document.createElement("select");
+                    select.setAttribute("id","measurement"+indexLetter);
+                    
+                    // min/max loop
+                    console.log(measurementsBreakdown[indexLetter].min);
+                    console.log(measurementsBreakdown[indexLetter].max);
+                    var optionMin = measurementsBreakdown[indexLetter].min;
+                    var optionMax = measurementsBreakdown[indexLetter].max;
+                    for(j=optionMin; j<=optionMax; j++){
+                        var option = document.createElement("option");
+                        console.log(j);
+                        option.text = j.toString();
+                        debugger;
+                        select.options.add(option);
+                    }
+                    selectDropdowns.push(select);
+                }
+                showerTypesSlide.append(selectDropdowns);
+                //showerTypesSlide.append();
+                $('#two').liteAccordion('next');
+            }
             // function getCategories($glassd, returnFunction) {
             //     return $.ajax({
             //         type: "GET",
@@ -365,6 +382,88 @@
             // }
 
         </script>
+    </head>
+    <body>
+    <h1>Shower Doors iframe</h1>
+        <div id="two">
+            <ol>
+                <li>
+                    <h2><span>Shower Type</span></h2>
+                    <div>
+                        <div class="inner-slide-container" id="category-slide">
+                            <p>
+                            <div class="spinner">
+                                    <div class="bounce1"></div>
+                                    <div class="bounce2"></div>
+                                    <div class="bounce3"></div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Layout</span></h2>
+                    <div>
+                        <div class="inner-slide-container" id="layout-slide">
+                            <p>
+                                <div class="spinner">
+                                    <div class="bounce1"></div>
+                                    <div class="bounce2"></div>
+                                    <div class="bounce3"></div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Measurements</span></h2>
+                    <div>
+                        <div class="inner-slide-container" id="measurements-slide">
+                            <p>
+                                <div class="spinner">
+                                    <div class="bounce1"></div>
+                                    <div class="bounce2"></div>
+                                    <div class="bounce3"></div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Customizations</span></h2>
+                    <div>
+                        <div class="inner-slide-container" id="options-slide">
+                            <p>
+                                <div class="spinner">
+                                    <div class="bounce1"></div>
+                                    <div class="bounce2"></div>
+                                    <div class="bounce3"></div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2><span>Your Information</span></h2>
+                    <div>
+                        <div class="inner-slide-container" id="information-slide">
+                            <p>
+                                <div class="spinner">
+                                    <div class="bounce1"></div>
+                                    <div class="bounce2"></div>
+                                    <div class="bounce3"></div>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <noscript>
+                <p>Please enable JavaScript to get the full experience.</p>
+            </noscript>
+        </div>
+
+
 
     </body>
 </html>
