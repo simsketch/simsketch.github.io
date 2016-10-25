@@ -96,6 +96,12 @@
             img {
                 cursor:pointer;
             }
+            #measurements-slide {
+                display:inline;
+            }
+            .measurement-whole {
+                display:inline;
+            }
                     /*loading animation css*/
 
         .spinner {
@@ -318,7 +324,6 @@
             }
             function populateMeasurements(breakdown) {
                 var showerTypesSlide = $('#measurements-slide');
-                var theHtml = "";
                 var measurementsBreakdown = breakdown.Measurements;
                 // debugger;
 
@@ -341,22 +346,33 @@
                     var indexLetter = toLetters(i+1);
                     var select = document.createElement("select");
                     select.setAttribute("id","measurement"+indexLetter);
+                    select.setAttribute("class","measurement-whole");
                     
                     // min/max loop
-                    console.log(measurementsBreakdown[indexLetter].min);
-                    console.log(measurementsBreakdown[indexLetter].max);
+                    //console.log(measurementsBreakdown[indexLetter].min);
+                    //console.log(measurementsBreakdown[indexLetter].max);
                     var optionMin = measurementsBreakdown[indexLetter].min;
                     var optionMax = measurementsBreakdown[indexLetter].max;
                     for(j=optionMin; j<=optionMax; j++){
                         var option = document.createElement("option");
-                        console.log(j);
+                        //console.log(j);
                         option.text = j.toString();
-                        debugger;
                         select.options.add(option);
                     }
                     selectDropdowns.push(select);
                 }
+                showerTypesSlide.empty();
+                showerTypesSlide.append('<img src="'+breakdown.MeasurementPicture+'"/>');
                 showerTypesSlide.append(selectDropdowns);
+                // var meas = $('.measurement-whole');
+                // for (var i=0; i<meas.length;i++) {
+                //     meas[i].before(toLetters(i+1)+": ");
+                //     meas[i].append("<select class='fraction-dropdown'>"+
+                //         "<option value=''>Fraction</option>"+
+                //         "<option value='1/2'>1/2</option>"+
+                //         "<option value='3/4'>3/4</option>"+
+                //         "</select>");
+                // }
                 //showerTypesSlide.append();
                 $('#two').liteAccordion('next');
             }
